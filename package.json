@@ -1,7 +1,7 @@
 {
     "name": "GeoDb"
-  , "version": "0.0.1"
-  , "description": "A simple database for storing grid reference locations. Meant as a non-trivial but very simple Express/Mongoose example."
+  , "version": "0.0.2"
+  , "description": "A simple database for storing grid reference locations. Meant as a non-trivial but very simple Express/Mongoose database API example."
   , "author": "Chris Bates-Keegan"
   , "private": true
   , "engines": { "node": ">= 0.6.x < 0.7.0" }

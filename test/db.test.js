@@ -7,7 +7,7 @@ describe('Database', function(){
     , b = new Location({"gridRef": "SD648280", "location": "along the way"})
     , c = new Location({"gridRef": "SD840217", "location": "round the corner"});
 
-  beforeEach(function(done){
+  before(function(done){
     Location.count(function(v){
     	Location.nextLocationRef = v+1;
     	
@@ -32,7 +32,7 @@ describe('Database', function(){
     });
   });
   
-  afterEach(function(done) {
+  after(function(done) {
   	Location.remove({},done);  	
   });
 });
