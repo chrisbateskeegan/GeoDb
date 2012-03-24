@@ -1,9 +1,10 @@
 var http = require('http')
 	,	mongoose = require('mongoose');
 
-
 describe('POST', function(){
   before(function(done){
+  	var Location = mongoose.model("Location");
+  	Location.nextLocationRef = -1;
   	done();
   });
 
@@ -11,7 +12,8 @@ describe('POST', function(){
     it('a valid location', function(done){
     	testLocationPost("gridRef=SD123123&location=This is a valid location", function(data) {
     		var response = JSON.parse(data);
-  	  	response.error.should.equal(false);
+    		response.error.should.equal(false);
+  	  	response.ref.should.not.equal(-1);
   	  	
   	  	var Location = mongoose.model('Location');
   	    Location.find({ref: response.ref}, function(err, locs){
