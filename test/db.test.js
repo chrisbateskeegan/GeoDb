@@ -1,54 +1,53 @@
-var app = require('../app')
-	,	mongoose = require('mongoose');
+var app = require('../app');
+var mongoose = require('mongoose');
+var models = require('../models');
+var assert = require('assert');
 
 describe('Database', function(){
-	var Location = mongoose.model('Location')
-    , a = new Location({"gridRef": "SD647277", "location": "down the road"})
-    , b = new Location({"gridRef": "SD648280", "location": "along the way"})
-    , c = new Location({"gridRef": "SD840217", "location": "round the corner"});
+    before(function(done){
+	models.Location.nextLocationRef=1;
 
-  before(function(done){
-    Location.count(function(v){
-    	Location.nextLocationRef = v+1;
-    	
-    	Location.remove({}, function(){
-    		save([a,b,c], done);
+	var a = new models.Location({"gridRef": "SD647277", "location": "down the road"});
+	var b = new models.Location({"gridRef": "SD648280", "location": "along the way"});
+	var c = new models.Location({"gridRef": "SD840217", "location": "round the corner"});
+
+    	models.Location.remove({}, function(){
+    	    save([a,b,c], done);
     	});
     });
-  });
 
-  describe('#find()', function(){
-    it('respond with matching records', function(done){
-      Location.find({}, function(err, res){
-        if (err) return done(err);
+    describe('#find()', function(){
+	it('should respond with matching records', function(done){
+	    models.Location.find({}, function(err, res){
+		if (err) return done(err);
         
-        res.should.have.length(3);
-        parseInt(res[0].ref).should.equal(1);
-        parseInt(res[1].ref).should.equal(2);
-        parseInt(res[2].ref).should.equal(3);
+		res.should.have.length(3);
+		res[0].ref.should.equal(1);
+		res[1].ref.should.equal(2);
+		res[2].ref.should.equal(3);
         
-        done();
-      });
+		done();
+	    });
+	});
     });
-  });
-  
-  after(function(done) {
-  	Location.remove({},done);  	
-  });
+    
+    after(function(done) {
+  	models.Location.remove({},done);  	
+    });
 });
 
 function save(locs, fn) {
-	var num = locs.length;
-	
-	locs.forEach(function(loc){
-		loc.save(function(err){
-			if ( err ) {
-				fn(err);
-			}
-			
-			if (--num == 0 ) {
-				fn();
-			}
-		});
+    var num = locs.length;
+    
+    locs.forEach(function(loc){
+	loc.save(function(err){
+	    if ( err ) {
+		fn(err);
+	    }
+	    
+	    if (--num == 0 ) {
+		fn();
+	    }
 	});
+    });
 }
