@@ -1,4 +1,3 @@
-var app        = require('../app');
 var mongoose   = require('mongoose');
 var geo	       = require('../geo');
 

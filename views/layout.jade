@@ -1,0 +1,59 @@
+html(lang='en/GB', ng-app="geodb")
+  head
+    title= title
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    style body { padding-top: 60px; }
+    block scripts
+      script(src='/client/js/libs/jquery.min.js')
+      script(src='/client/js/libs/angular.js')
+      //-script(src='/client/js/libs/angular-ui.min.js')
+      //-script(src='/client/js/libs/angular-ui-ieshiv.min.js')
+      script(src='/client/js/libs/bootstrap.min.js')
+      script(src='/client/js/libs/bootstrap-collapse.js')
+      script(src='/client/js/libs/bootstrap-button.js')
+      script(src='/client/js/libs/bootstrap-modal.js')
+      script(src='/client/js/libs/bootstrap-transition.js')
+      //-script(src='/client/js/libs/bootstrap-dropdown.js')
+      script(src='/client/js/libs/underscore-min.js')
+      script(src='/client/js/app.js')
+      script(src='/client/js/services.js')
+      script(src='/client/js/filters.js')
+      script(src='/client/js/directives.js')
+      script(src='http://maps.googleapis.com/maps/api/js?key=AIzaSyCBYso1_TcmxJfMnzwvd1DsoX2g_0dGBZM&sensor=false&libraries=geometry')
+    block stylesheets
+      link(rel='stylesheet', href='/client/css/bootstrap.min.css')
+      link(rel='stylesheet', href='/client/css/bootstrap-responsive.min.css')
+      link(rel='stylesheet', href='/client/css/app.css')
+  body
+    block header
+      .navbar.navbar-fixed-top
+        .navbar-inner
+          .container
+            a.btn.btn-navbar(data-toggle='collapse', data-target='.nav-collapse')
+              span.icon-bar
+              span.icon-bar
+              span.icon-bar 
+            a.brand(href='#')= title
+            .nav-collapse
+              ul.nav
+                li.active
+                  a(href='/#') Home
+                li.dropdown#browse
+                  a.dropdown-toggle(data-toggle='dropdown', data-target='#', href='#browse') Browse
+                    b.caret
+                  ul.dropdown-menu
+                    li
+                      a(href='/#browse/map') 
+                        i.icon-map-marker
+                        |  Map
+                    li
+                      a(href='/#browse/list')
+                        i.icon-list
+                        |  List
+                li
+                  a(href='#search') Search
+    block content
+    block footer
+      footer
+        hr
+        p &copy; Lancashire Badger Group 2012

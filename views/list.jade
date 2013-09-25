@@ -1,0 +1,21 @@
+extends layout
+
+append scripts
+  script(src='/client/js/controllers.js')
+
+append stylesheets
+
+block content
+  #content
+    h1 List of all available locations
+    table.table.table-striped
+      thead
+        tr
+          td Reference
+          td Grid Reference
+          td Location
+      tbody
+         tr(ng-repeat='location in locations')
+          td {{location.ref}}
+          td {{location.gridRef}}
+          td {{location.location}}

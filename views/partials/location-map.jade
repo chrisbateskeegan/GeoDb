@@ -1,0 +1,9 @@
+.modal.hide.animate
+  .modal-header
+    button.close(ng-click='show=false') &times;
+    h3 Location Map
+  .modal-body
+    .map_canvas
+    strong {{description}}
+  .modal-footer
+    .btn(ng-click='show=false') Close

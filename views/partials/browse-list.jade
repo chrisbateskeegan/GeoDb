@@ -1,0 +1,72 @@
+h1 All Locations 
+  span.badge(ng-class='loadedClass') {{locations.length}}
+
+form.form-inline
+  button.btn(ng-click='cancel(); offset.value=0') 
+    i.icon-fast-backward
+  button.btn(ng-click='cancel(); offset.decrement()')
+    i.icon-backward.add-on
+  input.input-mini(ng-model='offset.value')
+  button.btn(ng-click='cancel(); offset.increment()')
+    i.icon-forward
+  button.btn(ng-click='cancel(); offset.value=locations.length-offset.show')
+    i.icon-fast-forward
+  select.input-mini(ng-model='offset.show', ng-options='o for o in offset.showOptions')
+
+alert(type='success',autohide='true',show='submittedAlertMessage')
+  strong Well Done!
+  |  Your changes have been saved to the database.
+
+alert(type='success',autohide='true',show='removedAlertMessage')
+  strong Location Deleted
+  |  You have removed a location from the database.
+
+alert(type='error',show='putFailedAlertMessage')
+  strong Save Failed
+  |  We were unable to save your changes to the database.
+
+map-modal.map_modal(
+  locations='locations',
+  desc='map.location.location',
+  lat='map.location.lat',
+  lon='map.location.lon',
+  show='map.show'
+)
+
+table.table.table-striped
+  thead
+    tr
+      td(style='width:5%;') 
+      td(style='width:10%;') 
+        h4 Reference
+      td(style='width:15%')
+        h4 Grid Reference
+      td 
+        h4 Location
+      td(style='width:10%;') 
+  tbody
+    tr(ng-repeat='location in locations | slice:offset.value | limitTo: offset.show')
+      td(ng-hide='location.editMode')
+        .btn(ng-click='edit(location, $index)')
+          i.icon-edit
+      td(ng-hide='location.editMode')  {{location.ref}}
+      td(ng-hide='location.editMode')
+        .btn.btn-info(ng-click='map.popup(location)')
+          strong {{location.gridRef}} 
+          i.icon-map-marker.icon-white
+      td(ng-hide='location.editMode') {{location.location}}
+      td(ng-hide='location.editMode')
+        .btn.btn-danger(ng-click='remove(location, $index)')
+          i.icon-remove.icon-white
+      td(ng-show='location.editMode')
+      td(ng-show='location.editMode') {{location.ref}}
+      td(ng-show='location.editMode')
+        input.input-small(ng-model='location.gridRef')
+      td(ng-show='location.editMode')
+        textarea(ng-model='location.location')
+      td(ng-show='location.editMode')
+        .btn.btn-success(ng-click='submit(location, $index)')
+          i.icon-ok-sign.icon-white
+        .btn(ng-click='cancel()')
+          i.icon-remove.icon-black
+
