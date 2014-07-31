@@ -14,25 +14,25 @@ app.configure(function(){
   app.use(express.bodyParser());
   app.use(express.methodOverride());
   app.use(app.router);
-  app.use(require('less-middleware')({ src: __dirname + '/', compress: true }));
+//  app.use(require('less-middleware')({ src: __dirname + '/', compress: true }));
   app.use('/client',express.static(path.join(__dirname, 'client')));
   app.use(express.logger());
 });
 
 app.configure('development', function(){
-  app.set('db-uri', 'mongodb://localhost/geodb-dev');
+  app.set('db-uri', 'mongodb://db.evansfinch.co.uk/geodb-dev');
   app.set('port', '3001');
   app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 });
 
 app.configure('production', function(){
-  app.set('db-uri', 'mongodb://localhost/geodb-production');
+  app.set('db-uri', 'mongodb://db.evansfinch.co.uk/geodb-production');
   app.set('port', '5000');
   app.use(express.errorHandler());
 });
 
 app.configure('test', function(){
-  app.set('db-uri', 'mongodb://localhost/geodb-test');
+  app.set('db-uri', 'mongodb://db.evansfinch.co.uk/geodb-test');
   app.set('port', '3002');
   app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 });
