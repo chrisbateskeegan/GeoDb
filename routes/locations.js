@@ -54,7 +54,7 @@ exports.queryGridReference = function(req,res){
     if ( err != false ) {
       res.send({"error": true});
     } else{
-      res.json(locs);
+      res.jsonp(locs);
     }
   });
 };
